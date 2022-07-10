@@ -1,23 +1,23 @@
 package io.cryptopunks.client.crypto
 
-import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUIntegerFactory
 import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUInteger
+import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUIntegerFactory
 import io.cryptopunks.client.bignumber.BigUIntegerFactoryMock
 import io.cryptopunks.client.bignumber.BigUIntegerMock
+import kotlin.js.JsName
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import tech.antibytes.kmock.MockCommon
 import tech.antibytes.kmock.verification.assertProxy
 import tech.antibytes.util.test.annotations.IgnoreJs
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.sameAs
-import kotlin.js.JsName
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 
 @IgnoreJs
 @MockCommon(
     CryptoContract.Key::class,
     BigUInteger::class,
-    BigUIntegerFactory::class,
+    BigUIntegerFactory::class
 )
 class CryptoProtocolSpec {
     private val key: KeyMock = kmock()

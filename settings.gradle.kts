@@ -13,7 +13,7 @@ include(
     ":util",
     ":bigint",
     ":crypto",
-    ":deck",
+    ":deck"
 )
 
 buildCache {

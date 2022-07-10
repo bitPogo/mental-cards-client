@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>EmptyKtFile:settings.gradle.kts$.settings.gradle.kts</ID>
+    <ID>EqualsWithHashCodeExist:BigUInteger.kt$BigUInteger : BigUInteger</ID>
+    <ID>MagicNumber:BigUInteger.kt$BigUInteger$10</ID>
+    <ID>MagicNumber:BigUIntegerFactory.kt$BigUIntegerFactory$10</ID>
+    <ID>MagicNumber:BigUIntegerFactory.kt$BigUIntegerFactory$6</ID>
+    <ID>MagicNumber:BigUIntegerFactory.kt$BigUIntegerFactory$7</ID>
+    <ID>MagicNumber:BigUIntegerFactory.kt$BigUIntegerFactory$8</ID>
+    <ID>MagicNumber:Dangerfile.df.kts$1000</ID>
+    <ID>MagicNumber:Dangerfile.df.kts$20</ID>
+    <ID>MagicNumber:Dangerfile.df.kts$2000</ID>
+    <ID>MagicNumber:Dangerfile.df.kts$500</ID>
+    <ID>MagicNumber:Encoder.kt$Encoder$5</ID>
+    <ID>MagicNumber:settings.gradle.kts$30</ID>
+    <ID>MaxLineLength:Dangerfile.df.kts$val</ID>
+    <ID>MaxLineLength:GradlePlugin.kt$GradlePlugin$const val runtimeConfig = "tech.antibytes.gradle-plugins:antibytes-runtime-configuration:${Version.gradle.antibytes}"</ID>
+    <ID>MaxLineLength:build.gradle.kts$/*sourceSets { getByName("androidTest") { java.srcDirs( "${project.buildDir.absolutePath.trimEnd('/')}/generated/ksp/debugAndroidTest", // Just to make the IDE happy ) } getByName("test") { java.srcDirs( "${project.buildDir.absolutePath.trimEnd('/')}/generated/ksp/debugUnitTest", // Just to make the IDE happy ) } }*/</ID>
+    <ID>MaxLineLength:build.gradle.kts$config = files("$projectDir/detekt/config.yml")</ID>
+    <ID>MayBeConst:DeckContract.kt$DeckContract$internal val ENCODING_BASE = "1461501637330902918203684832716283019655932542976"</ID>
+    <ID>MemberNameEqualsClassName:Base64.kt$Base64$private const val BASE64 = "base64"</ID>
+    <ID>TooGenericExceptionThrown:BigUInteger.kt$BigUInteger$throw RuntimeException(NO_MULTIPLICATIVE_INVERSE)</ID>
+    <ID>TooManyFunctions:BigUIntArithmetic.kt$BigUIntArithmetic$BigUIntArithmetic</ID>
+    <ID>TooManyFunctions:BigUInteger.kt$BigUInteger : BigUInteger</ID>
+    <ID>TooManyFunctions:BigUIntegerContract.kt$BigUIntegerContract$BigUIntArithmetic</ID>
+    <ID>TooManyFunctions:BigUIntegerContract.kt$BigUIntegerContract$BigUInteger</ID>
+    <ID>TooManyFunctions:BigUIntegerFactory.kt$BigUIntegerFactory : BigUIntegerFactory</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val androidAndroidTest by getting { dependsOn(androidAndroidTestRelease) dependencies { implementation(Dependency.jvm.test.junit) implementation(Dependency.android.test.junit) implementation(Dependency.android.test.espressoCore) implementation(Dependency.android.test.uiAutomator) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val androidAndroidTest by getting { dependsOn(commonTest) dependsOn(androidAndroidTestRelease) dependencies { implementation(Dependency.jvm.test.junit) implementation(Dependency.android.test.junit) implementation(Dependency.android.test.espressoCore) implementation(Dependency.android.test.uiAutomator) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val androidMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.android) implementation(LocalDependency.androidx.annotation) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val androidMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.android) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val androidTest by getting { dependsOn(androidAndroidTestRelease) dependsOn(androidTestFixtures) dependsOn(androidTestFixturesDebug) dependsOn(androidTestFixturesRelease) dependencies { implementation(Dependency.multiplatform.test.jvm) implementation(Dependency.multiplatform.test.junit) implementation(Dependency.android.test.robolectric) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val androidTest by getting { dependsOn(androidTestFixtures) dependsOn(androidTestFixturesDebug) dependsOn(androidTestFixturesRelease) dependencies { implementation(Dependency.multiplatform.test.jvm) implementation(Dependency.multiplatform.test.junit) implementation(Dependency.android.test.robolectric) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val commonMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.common) implementation(Dependency.multiplatform.serialization.common) implementation(project(":util")) implementation(project(":bigint")) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val commonMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.common) implementation(Dependency.multiplatform.uuid) implementation(project(":crypto")) implementation(project(":bigint")) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val commonMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.common) implementation(project(":util")) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val commonMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.common) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val commonTest by getting { dependencies { implementation(Dependency.multiplatform.test.common) implementation(Dependency.multiplatform.test.annotations) implementation(LocalDependency.antibytes.test.kmp.core) implementation(LocalDependency.antibytes.test.kmp.annotations) implementation(LocalDependency.antibytes.test.kmp.fixture) implementation(LocalDependency.antibytes.test.kmp.kmock) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val commonTest by getting { dependencies { implementation(Dependency.multiplatform.test.common) implementation(Dependency.multiplatform.test.annotations) implementation(LocalDependency.antibytes.test.kmp.core) implementation(LocalDependency.antibytes.test.kmp.annotations) implementation(LocalDependency.antibytes.test.kmp.fixture) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jsMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.js) implementation(Dependency.js.nodejs) implementation( npm(Npm.dependency.buffer.first, Npm.dependency.buffer.second) ) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jsMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.js) implementation(npm(Npm.dependency.bigInteger.first, Npm.dependency.bigInteger.second)) implementation(Dependency.js.nodejs) implementation(LocalDependency.bigNumbers) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jsMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.js) implementation(npm(Npm.dependency.bigInteger.first, Npm.dependency.bigInteger.second)) implementation(Dependency.js.nodejs) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jsTest by getting { dependencies { implementation(Dependency.multiplatform.test.js) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jvmMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.jdk) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jvmMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.jdk8) } resources.srcDir("$buildDir/generated/rust/") }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jvmMain by getting { dependencies { implementation(Dependency.multiplatform.kotlin.jdk8) } }</ID>
+    <ID>UnusedPrivateMember:build.gradle.kts$val jvmTest by getting { dependencies { implementation(Dependency.multiplatform.test.jvm) implementation(Dependency.multiplatform.test.junit) } }</ID>
+  </CurrentIssues>
+</SmellBaseline>

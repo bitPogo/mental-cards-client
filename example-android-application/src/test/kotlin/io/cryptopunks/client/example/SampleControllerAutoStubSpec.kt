@@ -6,6 +6,14 @@
 
 package io.cryptopunks.client.example
 
+import io.cryptopunks.client.example.contract.ExampleContract
+import io.cryptopunks.client.example.contract.ExampleContract.SampleDomainObject
+import io.cryptopunks.client.example.contract.ExampleContract.SampleLocalRepository
+import io.cryptopunks.client.example.contract.ExampleContract.SampleRemoteRepository
+import io.cryptopunks.client.example.contract.SampleDomainObjectMock
+import io.cryptopunks.client.example.contract.SampleLocalRepositoryMock
+import io.cryptopunks.client.example.contract.SampleRemoteRepositoryMock
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -16,13 +24,6 @@ import tech.antibytes.kfixture.fixture
 import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kfixture.listFixture
 import tech.antibytes.kmock.Mock
-import io.cryptopunks.client.example.contract.ExampleContract
-import io.cryptopunks.client.example.contract.ExampleContract.SampleDomainObject
-import io.cryptopunks.client.example.contract.ExampleContract.SampleLocalRepository
-import io.cryptopunks.client.example.contract.ExampleContract.SampleRemoteRepository
-import io.cryptopunks.client.example.contract.SampleDomainObjectMock
-import io.cryptopunks.client.example.contract.SampleLocalRepositoryMock
-import io.cryptopunks.client.example.contract.SampleRemoteRepositoryMock
 import tech.antibytes.kmock.verification.Verifier
 import tech.antibytes.kmock.verification.verify
 import tech.antibytes.kmock.verification.verifyOrder
@@ -34,12 +35,11 @@ import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeout
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeoutInScope
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import java.util.concurrent.atomic.AtomicReference
 
 @Mock(
     SampleRemoteRepository::class,
     SampleLocalRepository::class,
-    SampleDomainObject::class,
+    SampleDomainObject::class
 )
 class SampleControllerAutoStubSpec {
     private val fixture = kotlinFixture()

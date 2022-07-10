@@ -33,6 +33,9 @@ jobs:
         with:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '11'
+      - name: Setup rust toolchain
+        shell: bash
+        run: rustup target add armv7-linux-androideabi i686-linux-android aarch64-linux-android x86_64-linux-android
       - name: Cleanup
         run: ./gradlew clean
       - name: Lint
@@ -42,6 +45,6 @@ jobs:
       - name: Run Instrumented Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 32
-          script: ./gradlew :app-android:connectedCheck
+          api-level: 29
+          script: ./gradlew :bigint:connectedCheck :deck:connectedCheck
 

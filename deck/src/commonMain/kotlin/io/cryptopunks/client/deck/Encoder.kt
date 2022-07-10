@@ -3,15 +3,15 @@ package io.cryptopunks.client.deck
 import com.benasher44.uuid.Uuid
 import com.benasher44.uuid.bytes
 import com.benasher44.uuid.uuidOf
-import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUInteger
 import io.cryptopunks.client.bignumber.BigUIntegerContract
+import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUInteger
 import io.cryptopunks.client.bignumber.BigUIntegerFactory
 import io.cryptopunks.client.deck.DeckContract.ENCODING_BASE
 
 class Encoder internal constructor(
     private val bigUIntegerFactory: BigUIntegerContract.BigUIntegerFactory
-): DeckContract.Encoder {
-    constructor(): this(BigUIntegerFactory())
+) : DeckContract.Encoder {
+    constructor() : this(BigUIntegerFactory())
 
     private val encoderBase = bigUIntegerFactory.from(ENCODING_BASE)
 
@@ -26,7 +26,6 @@ class Encoder internal constructor(
     private fun extractCard(
         byteArray: ByteArray
     ): UInt = bigUIntegerFactory.from(byteArray.asUByteArray()).toString().toUInt()
-
 
     override fun decode(encodedCard: BigUInteger): Pair<UInt, Uuid> {
         val bytes = encodedCard.toByteArray()

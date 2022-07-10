@@ -9,7 +9,7 @@ import io.cryptopunks.client.crypto.CryptoContract.MODULUS
 class CryptoService internal constructor(
     bigUIntegerFactory: BigUIntegerContract.BigUIntegerFactory
 ) : CryptoProtocol {
-    constructor(): this(BigUIntegerFactory())
+    constructor() : this(BigUIntegerFactory())
     private val modulus = bigUIntegerFactory.from(MODULUS)
 
     override fun encrypt(

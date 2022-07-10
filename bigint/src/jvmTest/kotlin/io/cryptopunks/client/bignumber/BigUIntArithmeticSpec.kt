@@ -1,8 +1,8 @@
 package io.cryptopunks.client.bignumber
 
+import java.math.BigInteger
 import org.junit.Test
 import tech.antibytes.util.test.mustBe
-import java.math.BigInteger
 
 class BigUIntArithmeticSpec {
     @OptIn(ExperimentalUnsignedTypes::class)
@@ -215,5 +215,41 @@ class BigUIntArithmeticSpec {
 
         // Then
         actual.size mustBe 0
+    }
+
+    @OptIn(ExperimentalUnsignedTypes::class)
+    @Test
+    fun Given_a_number_it_transforms_it_into_a_string() {
+        // Given
+        val valueToString = UByteArray(3)
+        valueToString[0] = 1u
+        valueToString[1] = 90u
+        valueToString[2] = 228u
+
+        val number = BigInteger(valueToString.asByteArray())
+
+        // When
+        val actual = BigUIntArithmetic.intoString(number.toByteArray(), 10)
+
+        // Then
+        actual mustBe number.toString(10)
+    }
+
+    @OptIn(ExperimentalUnsignedTypes::class)
+    @Test
+    fun Given_tow_numbers_it_compares_them() {
+        // Given
+        val valueToString = UByteArray(3)
+        valueToString[0] = 1u
+        valueToString[1] = 90u
+        valueToString[2] = 228u
+
+        val number = BigInteger(valueToString.asByteArray())
+
+        // When
+        val actual = BigUIntArithmetic.compare(number.toByteArray(), number.toByteArray())
+
+        // Then
+        actual mustBe 0
     }
 }

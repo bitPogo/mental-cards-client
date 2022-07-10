@@ -33,7 +33,7 @@ class RandomStub(
     @JsName("nextBytesArrayStub")
     var nextBytesArray: ((Int) -> ByteArray)? = null,
     @JsName("nextBytesRangedStub")
-    var nextBytesRanged: ((ByteArray, Int, Int) -> ByteArray)? = null,
+    var nextBytesRanged: ((ByteArray, Int, Int) -> ByteArray)? = null
 ) : Random() {
     override fun nextBits(bitCount: Int): Int {
         return nextBits?.invoke(bitCount) ?: throw RuntimeException("No SideEffect for nextBits!")

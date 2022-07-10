@@ -7,7 +7,11 @@ import io.cryptopunks.client.crypto.CryptoContract.KeyPair
 import io.cryptopunks.client.crypto.CryptoProtocolMock
 import io.cryptopunks.client.crypto.KeyMock
 import io.cryptopunks.client.mock.RandomStub
-import tech.antibytes.kfixture.kotlinFixture
+import kotlin.js.JsName
+import kotlin.random.Random
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertFailsWith
 import tech.antibytes.kmock.MockCommon
 import tech.antibytes.kmock.verification.Asserter
 import tech.antibytes.kmock.verification.assertOrder
@@ -17,11 +21,6 @@ import tech.antibytes.kmock.verification.verify
 import tech.antibytes.util.test.annotations.IgnoreJs
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.js.JsName
-import kotlin.random.Random
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
 
 @MockCommon(
     CryptoContract.CryptoProtocol::class,
@@ -31,7 +30,6 @@ import kotlin.test.assertFailsWith
 @IgnoreJs
 class DeckEncryptionServiceSpec {
     private val collector = Asserter()
-    private val fixture = kotlinFixture()
     private val random = RandomStub()
     private val cryptoService: CryptoProtocolMock = kmock(collector = collector)
 
@@ -59,7 +57,7 @@ class DeckEncryptionServiceSpec {
         val cards: List<BigUIntegerMock> = listOf(
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         val shuffleKeyValue: BigUIntegerMock = kmock()
@@ -85,7 +83,7 @@ class DeckEncryptionServiceSpec {
         verify(exactly = 3) {
             cryptoService._encrypt.hasBeenStrictlyCalledWith(
                 shuffleKey,
-                or(eq(cards[0]), eq(cards[1]), eq(cards[2]),)
+                or(eq(cards[0]), eq(cards[1]), eq(cards[2]))
             )
         }
     }
@@ -97,7 +95,7 @@ class DeckEncryptionServiceSpec {
         val cards: List<BigUIntegerMock> = listOf(
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         // Then
@@ -120,7 +118,7 @@ class DeckEncryptionServiceSpec {
         val cards: List<BigUIntegerMock> = listOf(
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         val shuffleDecryptionKey: KeyMock = kmock()
@@ -144,7 +142,7 @@ class DeckEncryptionServiceSpec {
             random = Random(0),
             cryptoService = cryptoService,
             shuffleKeyPair = KeyPair(null, shuffleDecryptionKey),
-            cardKeys = keys,
+            cardKeys = keys
         ).encryptCardWise(cards)
 
         // Then

@@ -1,10 +1,10 @@
 package io.cryptopunks.client.util
 
+import kotlin.js.JsName
+import kotlin.test.Test
 import tech.antibytes.util.test.annotations.RobolectricTestRunner
 import tech.antibytes.util.test.annotations.RunWithRobolectricTestRunner
 import tech.antibytes.util.test.mustBe
-import kotlin.js.JsName
-import kotlin.test.Test
 
 @RunWithRobolectricTestRunner(RobolectricTestRunner::class)
 class Base64Spec {

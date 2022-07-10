@@ -14,6 +14,8 @@ internal object BigUIntArithmetic : BigUIntegerContract.BigUIntArithmetic {
     external override fun gcd(number: ByteArray, other: ByteArray): ByteArray
     external override fun shiftLeft(number: ByteArray, shifts: Long): ByteArray
     external override fun shiftRight(number: ByteArray, shifts: Long): ByteArray
-    external override fun modPow(base: ByteArray, exponent: ByteArray, modulus: ByteArray, ): ByteArray
+    external override fun modPow(base: ByteArray, exponent: ByteArray, modulus: ByteArray): ByteArray
     external override fun modInverse(number: ByteArray, modulus: ByteArray): ByteArray
+    external override fun intoString(number: ByteArray, radix: Int): String
+    external override fun compare(number1: ByteArray, number2: ByteArray): Int
 }

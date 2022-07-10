@@ -55,7 +55,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Dependency.multiplatform.kotlin.common)
-                implementation(LocalDependency.bigNumbers)
                 implementation(project(":util"))
             }
         }
@@ -119,6 +118,7 @@ kotlin {
                 implementation(Dependency.multiplatform.kotlin.js)
                 implementation(npm(Npm.dependency.bigInteger.first, Npm.dependency.bigInteger.second))
                 implementation(Dependency.js.nodejs)
+                implementation(LocalDependency.bigNumbers)
 
             }
         }

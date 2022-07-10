@@ -1,7 +1,10 @@
 package io.cryptopunks.client.bignumber
 
-import com.ionspin.kotlin.bignum.integer.util.toBigEndianUByteArray
 import io.cryptopunks.client.util.Base64
+import kotlin.math.abs
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertFailsWith
 import tech.antibytes.kfixture.fixture
 import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kmock.MockCommon
@@ -10,10 +13,6 @@ import tech.antibytes.util.test.annotations.IgnoreJs
 import tech.antibytes.util.test.annotations.RobolectricTestRunner
 import tech.antibytes.util.test.annotations.RunWithRobolectricTestRunner
 import tech.antibytes.util.test.mustBe
-import kotlin.math.abs
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
 
 @IgnoreJs
 @RunWithRobolectricTestRunner(RobolectricTestRunner::class)
@@ -23,6 +22,7 @@ import kotlin.test.assertFailsWith
 class BigUIntegerSpec {
     private val fixture = kotlinFixture()
     private val rechenwerk: BigUIntArithmeticMock = kmock()
+
     // see: https://docs.rs/num-bigint-dig/0.4.0/src/num_bigint_dig/prime.rs.html#449
     private val primes = listOf(
         "2",
@@ -48,11 +48,11 @@ class BigUIntegerSpec {
         "5521712099665906221540423207019333379125265462121169655563495403888449493493629943498064604536961775110765377745550377067893607246020694972959780839151452457728855382113555867743022746090187341871655890805971735385789993",
         "203956878356401977405765866929034577280193993314348263094772646453283062722701277632936616063144088173312372882677123879538709400158306567338328279154499698366071906766440037074217117805690872792848149112022286332144876183376326512083574821647933992961249917319836219304274280243803104015000563790123",
         // ECC primes: http://tools.ietf.org/html/draft-ladd-safecurves-02
-        "3618502788666131106986593281521497120414687020801267626233049500247285301239",                                                                                  // Curve1174: 2^251-9
-        "57896044618658097711785492504343953926634992332820282019728792003956564819949",                                                                                 // Curve25519: 2^255-19
-        "9850501549098619803069760025035903451269934817616361666987073351061430442874302652853566563721228910201656997576599",                                           // E-382: 2^382-105
-        "42307582002575910332922579714097346549017899709713998034217522897561970639123926132812109468141778230245837569601494931472367",                                 // Curve41417: 2^414-17
-        "6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151", // E-521: 2^521-1
+        "3618502788666131106986593281521497120414687020801267626233049500247285301239", // Curve1174: 2^251-9
+        "57896044618658097711785492504343953926634992332820282019728792003956564819949", // Curve25519: 2^255-19
+        "9850501549098619803069760025035903451269934817616361666987073351061430442874302652853566563721228910201656997576599", // E-382: 2^382-105
+        "42307582002575910332922579714097346549017899709713998034217522897561970639123926132812109468141778230245837569601494931472367", // Curve41417: 2^414-17
+        "6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151" // E-521: 2^521-1
     )
 
     @BeforeTest
@@ -64,6 +64,8 @@ class BigUIntegerSpec {
     fun Given_toString_is_called_it_returns_the_value_of_the_given_Number() {
         // Given
         val number: Long = abs(fixture.fixture<Long>())
+
+        rechenwerk._intoString returns number.toString()
 
         // When
         val actual = BigUIntegerFactory(rechenwerk).from(number.toString())
@@ -77,6 +79,7 @@ class BigUIntegerSpec {
         primes.forEach { prime ->
             // Given
             val number = BigUIntegerFactory(rechenwerk).from(prime)
+            rechenwerk._intoString returns prime
 
             // When
             val actual = number.toBase64Encoded()
@@ -89,8 +92,11 @@ class BigUIntegerSpec {
     @Test
     fun Given_equals_is_called_it_returns_false_if_the_given_other_has_not_the_same_value() {
         // Given
+        val value = fixture.fixture<UInt>()
         val other: Any? = fixture.fixture()
-        val number = BigUIntegerFactory(rechenwerk).from(fixture.fixture<UInt>())
+        val number = BigUIntegerFactory(rechenwerk).from(value)
+
+        rechenwerk._intoString returns value.toString()
 
         // When
         val actual = number == other
@@ -105,6 +111,8 @@ class BigUIntegerSpec {
         val value = fixture.fixture<UInt>()
         val number = BigUIntegerFactory(rechenwerk).from(value)
 
+        rechenwerk._intoString returns value.toString()
+
         // When
         val actual = number.equals(value)
 
@@ -116,6 +124,8 @@ class BigUIntegerSpec {
     fun Given_toUByteArray_is_called_it_returns_the_wrapped_ByteArray_as_a_UByteArray() {
         // Given
         val value: UByteArray = fixture.fixture()
+
+        rechenwerk._intoString returns value.toString()
 
         // When
         val actual = BigUInteger(rechenwerk, value).toUByteArray()
@@ -139,14 +149,16 @@ class BigUIntegerSpec {
     @Test
     fun Given_compareTo_is_called_it_returns_a_positive_Integer_if_the_number1_is_larger_than_number2() {
         // Given
-        val number1 = BigUIntegerFactory(rechenwerk).from("42")
-        val number2 = BigUIntegerFactory(rechenwerk).from("23")
+        val number1 = BigUIntegerFactory(rechenwerk).from("23")
+        val number2 = BigUIntegerFactory(rechenwerk).from("42")
+
+        rechenwerk._compare returns 1
 
         // When
-        val actual = number1.compareTo(number2)
+        val actual = number1 > number2
 
         // Then
-        actual mustBe 1
+        actual mustBe true
     }
 
     @Test
@@ -155,23 +167,28 @@ class BigUIntegerSpec {
         val number1 = BigUIntegerFactory(rechenwerk).from("23")
         val number2 = BigUIntegerFactory(rechenwerk).from("42")
 
+        rechenwerk._compare returns -1
+
         // When
-        val actual = number1.compareTo(number2)
+        val actual = number1 < number2
 
         // Then
-        actual mustBe -1
+        actual mustBe true
     }
 
     @Test
     fun Given_compareTo_is_called_it_returns_zero_if_the_number1_and_number2_have_the_same_value() {
         // Given
-        val number = BigUIntegerFactory(rechenwerk).from(fixture.fixture<UByteArray>())
+        val number1 = BigUIntegerFactory(rechenwerk).from("23")
+        val number2 = BigUIntegerFactory(rechenwerk).from("42")
+
+        rechenwerk._compare returns 0
 
         // When
-        val actual = number.compareTo(number)
+        val actual = number1 <= number2
 
         // Then
-        actual mustBe 0
+        actual mustBe true
     }
 
     @Test
@@ -200,8 +217,10 @@ class BigUIntegerSpec {
     @Test
     fun Given_minus_is_called_it_fails_if_the_minuend_is_smaller_than_the_subtrahend() {
         // Given
-        val minuend = 23u.toBigEndianUByteArray()
-        val subtrahend = 42u.toBigEndianUByteArray()
+        val minuend = arrayOf(23.toUByte()).toUByteArray()
+        val subtrahend = arrayOf(42.toUByte()).toUByteArray()
+
+        rechenwerk._compare returns -1
 
         // When
         val error = assertFailsWith<IllegalArgumentException> {
@@ -215,11 +234,12 @@ class BigUIntegerSpec {
     @Test
     fun Given_minus_is_called_it_delegates_the_call_to_the_Rechenwerk_and_returns_its_result() {
         // Given
-        val minuend = 42u.toBigEndianUByteArray()
-        val subtrahend = 23u.toBigEndianUByteArray()
+        val minuend = arrayOf(42.toUByte()).toUByteArray()
+        val subtrahend = arrayOf(23.toUByte()).toUByteArray()
         val result: ByteArray = fixture.fixture()
 
         rechenwerk._subtract.returnValue = result
+        rechenwerk._compare returns 1
 
         // When
         val actual = BigUInteger(rechenwerk, minuend) - BigUInteger(rechenwerk, subtrahend)
@@ -427,7 +447,7 @@ class BigUIntegerSpec {
         // When
         val actual = BigUInteger(rechenwerk, base).modPow(
             exponent = BigUInteger(rechenwerk, exponent),
-            modulus = BigUInteger(rechenwerk, modulus),
+            modulus = BigUInteger(rechenwerk, modulus)
         )
 
         // Then

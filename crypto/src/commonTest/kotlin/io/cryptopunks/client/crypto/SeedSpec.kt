@@ -1,8 +1,8 @@
 package io.cryptopunks.client.crypto
 
-import tech.antibytes.util.test.isNot
 import kotlin.js.JsName
 import kotlin.test.Test
+import tech.antibytes.util.test.isNot
 
 class SeedSpec {
     @Test

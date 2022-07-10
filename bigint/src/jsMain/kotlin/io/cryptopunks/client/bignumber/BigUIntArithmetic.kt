@@ -31,4 +31,12 @@ internal object BigUIntArithmetic : BigUIntegerContract.BigUIntArithmetic {
     override fun modInverse(number: ByteArray, modulus: ByteArray): ByteArray {
         TODO()
     }
+
+    override fun intoString(number: ByteArray, radix: Int): String {
+        TODO()
+    }
+
+    override fun compare(number1: ByteArray, number2: ByteArray): Int {
+        TODO()
+    }
 }

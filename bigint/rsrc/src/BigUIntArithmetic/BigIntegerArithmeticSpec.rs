@@ -166,3 +166,66 @@ fn it_determines_the_multiplicative_inverse() {
         "0"
     );
 }
+
+#[test]
+fn it_returns_its_value_to_a_given_radix() {
+    // Given
+    let number = vec!(1, 42);
+
+    // When
+    let actual = intoString(number, 10);
+
+    // Then
+    assert_eq!(
+        actual,
+        "298"
+    );
+}
+
+#[test]
+fn it_returns_a_negative_int_if_number1_is_smaller_than_number2() {
+    // Given
+    let number1 = vec!(1, 42);
+    let number2 = vec!(1, 43);
+
+    // When
+    let actual = compare(number1, number2);
+
+    // Then
+    assert_eq!(
+        actual,
+        -1
+    );
+}
+
+#[test]
+fn it_returns_a_positve_int_if_number1_is_greater_than_number2() {
+    // Given
+    let number1 = vec!(1, 43);
+    let number2 = vec!(1, 42);
+
+    // When
+    let actual = compare(number1, number2);
+
+    // Then
+    assert_eq!(
+        actual,
+        1
+    );
+}
+
+#[test]
+fn it_returns_zero_int_if_number1_equals_number2() {
+    // Given
+    let number1 = vec!(1, 42);
+    let number2 = vec!(1, 42);
+
+    // When
+    let actual = compare(number1, number2);
+
+    // Then
+    assert_eq!(
+        actual,
+        0
+    );
+}

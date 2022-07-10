@@ -1,23 +1,21 @@
 package io.cryptopunks.client.bignumber
 
-import com.ionspin.kotlin.bignum.integer.Sign.POSITIVE
 import io.cryptopunks.client.util.Base64
-import com.ionspin.kotlin.bignum.integer.BigInteger as KtBigInteger
 
 class BigUInteger private constructor(
     private val bytes: ByteArray,
-    private val rechenwerk: BigUIntegerContract.BigUIntArithmetic,
+    private val rechenwerk: BigUIntegerContract.BigUIntArithmetic
 ) : BigUIntegerContract.BigUInteger {
     internal constructor(
         rechenwerk: BigUIntegerContract.BigUIntArithmetic,
         bytes: UByteArray
     ) : this(bytes.asByteArray(), rechenwerk)
 
-    private val bigInteger: KtBigInteger by lazy { KtBigInteger.fromByteArray(bytes, POSITIVE) }
+    val base10String by lazy { rechenwerk.intoString(bytes, 10) }
 
-    override fun compareTo(other: BigUIntegerContract.BigUInteger): Int {
-        return this.bigInteger.compareTo(KtBigInteger.fromUByteArray(other.toUByteArray(), POSITIVE))
-    }
+    override fun compareTo(
+        other: BigUIntegerContract.BigUInteger
+    ): Int = rechenwerk.compare(bytes, other.toByteArray())
 
     private fun wrapUpOperation(
         operation: () -> ByteArray
@@ -97,14 +95,14 @@ class BigUInteger private constructor(
             rechenwerk.modPow(
                 base = bytes,
                 exponent = exponent.toByteArray(),
-                modulus = modulus.toByteArray(),
+                modulus = modulus.toByteArray()
             )
         }
     }
 
-    override fun equals(other: Any?): Boolean = bigInteger.toString(10) == other.toString()
+    override fun equals(other: Any?): Boolean = toString() == other.toString()
 
-    override fun toString(): String = bigInteger.toString(10)
+    override fun toString(): String = base10String
 
     override fun toBase64Encoded(): String = Base64.encodeToString(toString())
 

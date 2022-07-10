@@ -10,8 +10,10 @@ object BigUIntegerContract {
         fun gcd(number: ByteArray, other: ByteArray): ByteArray
         fun shiftLeft(number: ByteArray, shifts: Long): ByteArray
         fun shiftRight(number: ByteArray, shifts: Long): ByteArray
-        fun modPow(base: ByteArray, exponent: ByteArray, modulus: ByteArray, ): ByteArray
+        fun modPow(base: ByteArray, exponent: ByteArray, modulus: ByteArray): ByteArray
         fun modInverse(number: ByteArray, modulus: ByteArray): ByteArray
+        fun intoString(number: ByteArray, radix: Int): String
+        fun compare(number1: ByteArray, number2: ByteArray): Int
     }
 
     interface BigUInteger {
@@ -30,6 +32,7 @@ object BigUIntegerContract {
             modulus: BigUInteger
         ): BigUInteger
         fun toBase64Encoded(): String
+
         @OptIn(ExperimentalUnsignedTypes::class)
         fun toUByteArray(): UByteArray
         fun toByteArray(): ByteArray
@@ -38,12 +41,12 @@ object BigUIntegerContract {
     interface BigUIntegerFactory {
         fun from(number: String): BigUInteger
         fun from(number: UInt): BigUInteger
+
         @OptIn(ExperimentalUnsignedTypes::class)
         fun from(bytes: UByteArray): BigUInteger
         fun fromBase64(number: String): BigUInteger
         fun getProbablePrime(size: Int): BigUInteger
     }
-
 
     internal const val SIGNED_NUMBER_ERROR = "Signed Numbers are forbidden!"
     internal const val PRIME_INIT_ERROR = "Prime size must be at least 2-bit."
