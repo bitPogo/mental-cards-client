@@ -101,10 +101,11 @@ kotlin {
         }
 
         val jvmMain by getting {
+            resources.srcDir("$buildDir/generated/rust/")
             dependencies {
                 implementation(Dependency.multiplatform.kotlin.jdk8)
+                implementation(LocalDependency.jarNativeBundler)
             }
-            resources.srcDir("$buildDir/generated/rust/")
         }
         val jvmTest by getting {
             dependencies {
@@ -145,7 +146,12 @@ cargo {
     prebuiltToolchains = true
     module  = rustDir
     libname = "bigint_arithmetic"
-    targets = listOf("arm", "arm64", "x86", "x86_64")
+    targets = listOf(
+        "arm",
+        "arm64",
+        "x86",
+        "x86_64",
+    )
     targetIncludes = arrayOf("*.*")
     pythonCommand = "python3"
 }
@@ -167,8 +173,8 @@ val cargoJvmBuild by tasks.creating(Sync::class.java) {
     dependsOn(cargoJvmAssemble)
 
     from("$rustDir/target/release")
-    include("*.dylib","*.so")
-    into( "$buildDir/generated/rust/")
+    include("*.dylib","*.so","*.dll")
+    into( "$buildDir/generated/rust/natives/osx_64")
 }
 
 tasks.withType(KotlinCompile::class.java) {

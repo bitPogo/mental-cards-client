@@ -11,7 +11,6 @@ import org.junit.Test
 import tech.antibytes.util.test.annotations.IgnoreJvm
 import tech.antibytes.util.test.mustBe
 
-@IgnoreJvm
 class EncoderSpec {
     private val encoded = Json.decodeFromString<List<String>>(TestConfig.startDeck0)
 
@@ -58,7 +57,8 @@ class EncoderSpec {
             val actual = Encoder().decode(Encoder().encode(card.toUInt(), uuid))
 
             // Then
-            actual mustBe Pair(card, uuid)
+            actual mustBe Pair(card.toUInt(), uuid)
         }
     }
 }
+

@@ -101,4 +101,6 @@ object Dependency {
     const val zing = "com.google.zxing:core:${Version.zxing}"
 
     const val bigNumbers = "com.ionspin.kotlin:bignum:${Version.bigNumbers}"
+
+    const val jarNativeBundler = "org.scijava:native-lib-loader:${Version.jarNativeBundler}"
 }

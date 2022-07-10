@@ -96,4 +96,9 @@ object Version {
      * [BigNumbers](https://github.com/ionspin/kotlin-multiplatform-bignum/releases)
      */
     const val bigNumbers = "0.3.6"
+
+    /**
+     * [native library loader](https://search.maven.org/artifact/org.scijava/native-lib-loader/2.4.0/jar)
+     */
+    const val jarNativeBundler = "2.4.0"
 }

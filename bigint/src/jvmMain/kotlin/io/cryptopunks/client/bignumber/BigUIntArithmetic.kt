@@ -1,9 +1,11 @@
 package io.cryptopunks.client.bignumber
 
+import org.scijava.nativelib.NativeLoader
+
 @Suppress("UnsafeDynamicallyLoadedCode")
 internal object BigUIntArithmetic : BigUIntegerContract.BigUIntArithmetic {
     init {
-        System.loadLibrary("bigint_arithmetic")
+        NativeLoader.loadLibrary("bigint_arithmetic")
     }
 
     external override fun add(summand1: ByteArray, summand2: ByteArray): ByteArray
