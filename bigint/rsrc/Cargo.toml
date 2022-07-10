@@ -1,0 +1,16 @@
+[package]
+name = "bigint_arithmetic"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+num-bigint-dig = "0.8.1"
+num-integer = "0.1.45"
+jni = { version = "0.19.0", default-features = false }
+
+[profile.release]
+lto = true
+
+[lib]
+name = "bigint_arithmetic"
+crate-type = ["cdylib"]
