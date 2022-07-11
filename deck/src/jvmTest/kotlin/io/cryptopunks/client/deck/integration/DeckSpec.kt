@@ -7,35 +7,36 @@ import io.cryptopunks.client.crypto.CryptoContract.KeyPair
 import io.cryptopunks.client.crypto.CryptoService
 import io.cryptopunks.client.crypto.KeyGenerator
 import io.cryptopunks.client.deck.*
+import java.security.SecureRandom
+import kotlin.random.asKotlinRandom
+import kotlin.test.Test
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import tech.antibytes.util.test.annotations.IgnoreJs
+import tech.antibytes.util.test.annotations.IgnoreJvm
 import tech.antibytes.util.test.mustBe
-import java.security.SecureRandom
-import kotlin.random.asKotlinRandom
-import kotlin.test.Test
 
 @Serializable
 data class TestKeys(
     @SerialName("e")
     val encryptionKey: String,
     @SerialName("d")
-    val decryptionKey: String,
+    val decryptionKey: String
 ) {
     fun toKeyPair(): KeyPair {
         return KeyGenerator().from(
             decryptionKey = decryptionKey,
-            encryptionKey = encryptionKey,
+            encryptionKey = encryptionKey
         )
     }
 }
 
+@IgnoreJvm
 class DeckSpec {
     private val uuid = uuidFrom("8f87d735-aada-4f77-afa1-f28bd07d16c9")
     private val testValues6 = Json.decodeFromString<List<String>>(TestConfig.encryptResult6)
-    private val testKeys6 = Json.decodeFromString<List<TestKeys>>(TestConfig.encryptKeys6).map { keyPair -> keyPair.toKeyPair()}
+    private val testKeys6 = Json.decodeFromString<List<TestKeys>>(TestConfig.encryptKeys6).map { keyPair -> keyPair.toKeyPair() }
 
     private val encryptionServiceFactory = DeckEncryptionServiceFactory(
         SecureRandom().asKotlinRandom(),
@@ -43,12 +44,9 @@ class DeckSpec {
     )
     private val decryptionServiceFactory = DeckDecryptionServiceFactory(CryptoService())
 
-
     @Test
     fun It_encrypts_and_decrypts() {
         // Given
-        val encryptionKeys = testKeys6.map { keyPair -> keyPair.encryptionKey!! }
-        val decryptionKeys = testKeys6.map { keyPair -> keyPair.decryptionKey }
         val encoder = Encoder()
         val keyPair = KeyGenerator().create()
         val encryptionService = encryptionServiceFactory.getInstance(
@@ -83,11 +81,13 @@ class DeckSpec {
         }
 
         val encryptionKeys = encKeys.map {
-                keyPair -> keyPair.encryptionKey!!
+                keyPair ->
+            keyPair.encryptionKey!!
         }
 
         val decryptionKeys = encKeys.map {
-                keyPair -> keyPair.decryptionKey
+                keyPair ->
+            keyPair.decryptionKey
         }
 
         val encryptionService = encryptionServiceFactory.getInstance(
@@ -97,7 +97,7 @@ class DeckSpec {
         val decryptionService = decryptionServiceFactory.getInstance(listOf(decryptionKeys))
         val salt = uuid4()
 
-        val encoded =  cards.map { card -> encoder.encode(card, salt) }
+        val encoded = cards.map { card -> encoder.encode(card, salt) }
         val encrypted = encryptionService.shuffleAndEncrypt(encoded)
         val decrypted = decryptionService.decryptCardWise(0, encrypted)
         val decoded = decrypted.map { encodedCard ->

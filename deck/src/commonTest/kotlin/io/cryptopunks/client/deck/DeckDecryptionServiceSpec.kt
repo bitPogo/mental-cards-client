@@ -5,24 +5,20 @@ import io.cryptopunks.client.bignumber.BigUIntegerMock
 import io.cryptopunks.client.crypto.CryptoContract
 import io.cryptopunks.client.crypto.CryptoProtocolMock
 import io.cryptopunks.client.crypto.KeyMock
-import tech.antibytes.kfixture.PublicApi
-import tech.antibytes.kfixture.fixture
-import tech.antibytes.kfixture.kotlinFixture
+import kotlin.js.JsName
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import tech.antibytes.kmock.MockCommon
 import tech.antibytes.kmock.verification.Asserter
 import tech.antibytes.kmock.verification.assertOrder
 import tech.antibytes.util.test.annotations.IgnoreJs
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.js.JsName
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
 
 @MockCommon(
     CryptoContract.CryptoProtocol::class,
     CryptoContract.Key::class,
-    BigUInteger::class,
+    BigUInteger::class
 )
 @IgnoreJs
 class DeckDecryptionServiceSpec {
@@ -40,7 +36,7 @@ class DeckDecryptionServiceSpec {
     fun It_fulfils_DeckDecryptionService() {
         DeckDecryptionService(
             cryptoService = cryptoService,
-            cardKeys = listOf(listOf(kmock())),
+            cardKeys = listOf(listOf(kmock()))
         ) fulfils DeckContract.DeckDecryptionService::class
     }
 
@@ -53,11 +49,11 @@ class DeckDecryptionServiceSpec {
 
         val keysPlayer0: List<KeyMock> = listOf(
             kmock(),
-            kmock(),
+            kmock()
         )
         val keysPlayer1: List<KeyMock> = listOf(
             kmock(),
-            kmock(),
+            kmock()
         )
 
         cryptoService._decrypt run { _, givenCard ->
@@ -76,12 +72,12 @@ class DeckDecryptionServiceSpec {
         collector.assertOrder {
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
                 keysPlayer0[cardIdx],
-                card,
+                card
             )
 
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
                 keysPlayer1[cardIdx],
-                card,
+                card
             )
         }
     }
@@ -92,7 +88,7 @@ class DeckDecryptionServiceSpec {
         // Given
         val deck: List<BigUIntegerMock> = listOf(
             kmock(),
-            kmock(),
+            kmock()
         )
 
         val cards: List<BigUIntegerMock> = listOf(
@@ -101,25 +97,25 @@ class DeckDecryptionServiceSpec {
             kmock(),
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         val keysPlayer0: List<KeyMock> = listOf(
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         val keysPlayer1: List<KeyMock> = listOf(
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         val keysPlayer2: List<KeyMock> = listOf(
             kmock(),
             kmock(),
-            kmock(),
+            kmock()
         )
 
         cryptoService._decrypt returnsMany cards
@@ -136,17 +132,17 @@ class DeckDecryptionServiceSpec {
         collector.assertOrder {
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
                 keysPlayer0[1],
-                deck[0],
+                deck[0]
             )
 
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
                 keysPlayer1[1],
-                cards[0],
+                cards[0]
             )
 
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
                 keysPlayer2[1],
-                cards[1],
+                cards[1]
             )
 
             cryptoService._decrypt.hasBeenStrictlyCalledWith(

@@ -1,7 +1,5 @@
 package io.cryptopunks.client.util
 
-import Buffer
-
 actual object Base64 : UtilContract.Base64 {
     private val buffer = js("require('buffer').Buffer")
 

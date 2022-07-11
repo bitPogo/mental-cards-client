@@ -3,14 +3,14 @@ package io.cryptopunks.client.deck
 import io.cryptopunks.client.crypto.CryptoContract
 import io.cryptopunks.client.crypto.CryptoProtocolMock
 import io.cryptopunks.client.crypto.KeyMock
-import tech.antibytes.kmock.MockCommon
-import tech.antibytes.util.test.fulfils
 import kotlin.js.JsName
 import kotlin.test.Test
+import tech.antibytes.kmock.MockCommon
+import tech.antibytes.util.test.fulfils
 
 @MockCommon(
     CryptoContract.CryptoProtocol::class,
-    CryptoContract.Key::class,
+    CryptoContract.Key::class
 )
 class DeckDecryptionServiceFactorySpec {
     private val cryptoService: CryptoProtocolMock = kmock()

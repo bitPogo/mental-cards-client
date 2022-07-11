@@ -1,8 +1,8 @@
 package io.cryptopunks.client.bignumber
 
-import io.cryptopunks.client.bignumber.BigUIntegerContract.PRIME_INIT_ERROR
 import com.ionspin.kotlin.bignum.integer.BigInteger as KtBigInteger
 import com.ionspin.kotlin.bignum.integer.Sign
+import io.cryptopunks.client.bignumber.BigUIntegerContract.PRIME_INIT_ERROR
 import io.cryptopunks.client.bignumber.externals.BigInteger
 import io.cryptopunks.client.bignumber.externals.bigInt
 import io.cryptopunks.client.util.Base64
@@ -12,7 +12,7 @@ import kotlin.random.nextUBytes
 actual class BigUIntegerFactory internal actual constructor(
     private var rechenwerk: BigUIntegerContract.BigUIntArithmetic
 ) : BigUIntegerContract.BigUIntegerFactory {
-    actual constructor(): this(rechenwerk = BigUIntArithmetic)
+    actual constructor() : this(rechenwerk = BigUIntArithmetic)
 
     private val random = Random(determineSeed())
     private fun determineSeed(): Int {
@@ -31,7 +31,7 @@ actual class BigUIntegerFactory internal actual constructor(
     actual override fun from(number: String): BigUIntegerContract.BigUInteger {
         validateString(number)
         val bigInt = KtBigInteger.parseString(number)
-        val bytes =  bigInt.toUByteArray()
+        val bytes = bigInt.toUByteArray()
 
         return BigUInteger(
             rechenwerk = rechenwerk,
@@ -43,7 +43,7 @@ actual class BigUIntegerFactory internal actual constructor(
         number: UInt
     ): BigUIntegerContract.BigUInteger {
         val bigInt = KtBigInteger.fromUInt(number)
-        val bytes =  bigInt.toUByteArray()
+        val bytes = bigInt.toUByteArray()
 
         return BigUInteger(
             rechenwerk = rechenwerk,
@@ -68,7 +68,7 @@ actual class BigUIntegerFactory internal actual constructor(
         size: Int,
         action: (Int) -> BigUInteger
     ): BigUInteger {
-        return if (size < 2 ) {
+        return if (size < 2) {
             throw IllegalArgumentException(PRIME_INIT_ERROR)
         } else {
             action(size)
@@ -156,14 +156,13 @@ actual class BigUIntegerFactory internal actual constructor(
             }
 
             if (bitLength(primeCandidate) == size) {
-                val actual =  KtBigInteger.parseString(primeCandidate.toString(10)).toUByteArray()
+                val actual = KtBigInteger.parseString(primeCandidate.toString(10)).toUByteArray()
 
                 prime = BigUInteger(
                     rechenwerk = rechenwerk,
-                    bytes = actual,
+                    bytes = actual
                 )
             }
-
         } while (prime == null)
 
         return prime

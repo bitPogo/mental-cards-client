@@ -1,7 +1,7 @@
 package io.cryptopunks.client.bignumber
 
-import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUInteger
 import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUIntArithmetic
+import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUInteger
 import io.cryptopunks.client.bignumber.BigUIntegerContract.PRIME_INIT_ERROR
 import io.cryptopunks.client.bignumber.BigUIntegerContract.SIGNED_NUMBER_ERROR
 import io.cryptopunks.client.util.Base64
@@ -11,7 +11,7 @@ import java.security.SecureRandom
 actual class BigUIntegerFactory internal actual constructor(
     private var rechenwerk: BigUIntArithmetic
 ) : BigUIntegerContract.BigUIntegerFactory {
-    actual constructor(): this(rechenwerk = BigUIntArithmetic)
+    actual constructor() : this(rechenwerk = BigUIntArithmetic)
 
     private val random = SecureRandom()
 
@@ -21,14 +21,13 @@ actual class BigUIntegerFactory internal actual constructor(
         }
     }
 
-
     actual override fun from(number: String): BigUInteger {
         validateString(number)
         val bigInt = BigInteger(number, 10)
 
         return BigUInteger(
             rechenwerk = rechenwerk,
-            bytes = bigInt.toByteArray().asUByteArray(),
+            bytes = bigInt.toByteArray().asUByteArray()
         )
     }
 
@@ -52,7 +51,7 @@ actual class BigUIntegerFactory internal actual constructor(
         size: Int,
         action: (Int) -> BigUInteger
     ): BigUInteger {
-        return if (size < 2 ) {
+        return if (size < 2) {
             throw IllegalArgumentException(PRIME_INIT_ERROR)
         } else {
             action(size)

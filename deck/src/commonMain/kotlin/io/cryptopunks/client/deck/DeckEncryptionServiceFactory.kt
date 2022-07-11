@@ -1,8 +1,8 @@
 package io.cryptopunks.client.deck
 
+import io.cryptopunks.client.crypto.CryptoContract.CryptoProtocol
 import io.cryptopunks.client.crypto.CryptoContract.Key
 import io.cryptopunks.client.crypto.CryptoContract.KeyPair
-import io.cryptopunks.client.crypto.CryptoContract.CryptoProtocol
 import kotlin.random.Random
 
 class DeckEncryptionServiceFactory(

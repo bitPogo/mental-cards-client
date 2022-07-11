@@ -25,7 +25,7 @@ captures/
 example-android-app/
 
 #  Rust Builds
-*/target/
+bigint/rsrc/target/
 
 # generated
 

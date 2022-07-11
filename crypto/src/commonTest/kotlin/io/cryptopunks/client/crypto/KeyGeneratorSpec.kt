@@ -1,10 +1,13 @@
 package io.cryptopunks.client.crypto
 
-import io.cryptopunks.client.mock.RandomStub
 import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUInteger
 import io.cryptopunks.client.bignumber.BigUIntegerContract.BigUIntegerFactory
 import io.cryptopunks.client.bignumber.BigUIntegerFactoryMock
 import io.cryptopunks.client.bignumber.BigUIntegerMock
+import io.cryptopunks.client.mock.RandomStub
+import kotlin.js.JsName
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import tech.antibytes.kmock.MockCommon
 import tech.antibytes.kmock.verification.assertProxy
 import tech.antibytes.util.test.annotations.IgnoreJs
@@ -13,9 +16,6 @@ import tech.antibytes.util.test.annotations.RunWithRobolectricTestRunner
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
 import tech.antibytes.util.test.sameAs
-import kotlin.js.JsName
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 
 @IgnoreJs
 @RunWithRobolectricTestRunner(RobolectricTestRunner::class)
@@ -112,7 +112,7 @@ class KeyGeneratorSpec {
 
         // When
         val actual = KeyGenerator(bigUIntegerFactory).from(
-            decryptionKey = key,
+            decryptionKey = key
         )
 
         // Then
@@ -139,7 +139,7 @@ class KeyGeneratorSpec {
         // When
         val actual = KeyGenerator(bigUIntegerFactory).from(
             encryptionKey = encryptionKeyStr,
-            decryptionKey = decryptionKeyStr,
+            decryptionKey = decryptionKeyStr
         )
 
         // Then

@@ -17,12 +17,12 @@ object Version {
         /**
          * [AnitBytes GradlePlugins](https://github.com/bitPogo/gradle-plugins)
          */
-        const val antibytes = "18bb640"
+        const val antibytes = "2dcd1e4"
 
         /**
          * [Spotless](https://plugins.gradle.org/plugin/com.diffplug.gradle.spotless)
          */
-        const val spotless = "6.4.2"
+        const val spotless = "6.8.0"
 
         /**
          * [Mozilla Rust Gradle](https://github.com/mozilla/rust-android-gradle/releases)
@@ -31,9 +31,9 @@ object Version {
     }
 
     object Antibytes {
-        const val test = "f25b461"
-        const val kfixture = "0.2.0"
-        const val kmock = "0.3.0-rc01"
+        const val test = "5b65d35-bump-updates-SNAPSHOT"
+        const val kfixture = "0.2.0-bump-updates-SNAPSHOT"
+        const val kmock = "0.3.0-rc02-bump-updates-SNAPSHOT"
     }
 
     /**
@@ -52,7 +52,7 @@ object Version {
         /**
          * [Google Hilt Compose](https://developer.android.com/jetpack/androidx/releases/hilt)
          */
-        const val hiltCompose = "1.2.0-rc01"
+        const val hiltCompose = "1.0.0"
     }
 
     /**

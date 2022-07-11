@@ -13,7 +13,7 @@ class KeyGenerator internal constructor(
     private val bigUIntegerFactory: BigUIntegerContract.BigUIntegerFactory,
     private val random: Random = Random(generateSeed())
 ) : CryptoContract.KeyGenerator {
-    constructor(): this(BigUIntegerFactory())
+    constructor() : this(BigUIntegerFactory())
     private val coprime by lazy { bigUIntegerFactory.from(COPRIME) }
     private val one by lazy { bigUIntegerFactory.from(1u) }
 
@@ -28,7 +28,6 @@ class KeyGenerator internal constructor(
             key = intermediate % coprime
         } while (key.gcd(coprime) != one)
 
-
         return key
     }
 
@@ -42,7 +41,7 @@ class KeyGenerator internal constructor(
 
         return KeyPair(
             encryptionKey = Key(encryptionKey),
-            decryptionKey = Key(decryptionKey),
+            decryptionKey = Key(decryptionKey)
         )
     }
 
@@ -59,7 +58,7 @@ class KeyGenerator internal constructor(
 
         return KeyPair(
             encryptionKey = encryption,
-            decryptionKey = decryption,
+            decryptionKey = decryption
         )
     }
 }

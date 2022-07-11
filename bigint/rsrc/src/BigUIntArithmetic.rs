@@ -116,6 +116,30 @@ pub fn modInverse(
 
 }
 
+pub fn intoString(
+    number: Vec<u8>,
+    radix: u32,
+) -> String {
+    BigUint::from_bytes_be(number.as_slice())
+        .to_str_radix(radix)
+}
+
+pub fn compare(
+    number: Vec<u8>,
+    other: Vec<u8>,
+) -> i32 {
+    let number1 = BigUint::from_bytes_be(number.as_slice());
+    let number2 = BigUint::from_bytes_be(other.as_slice());
+
+    if number1 < number2 {
+        -1
+    } else if number1 > number2 {
+        1
+    } else {
+        0
+    }
+}
+
 mod Java;
 #[cfg(test)]
 mod BigIntegerArithmeticSpec;

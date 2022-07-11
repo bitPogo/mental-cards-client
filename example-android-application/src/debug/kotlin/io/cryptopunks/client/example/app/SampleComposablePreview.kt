@@ -8,8 +8,6 @@ package io.cryptopunks.client.example.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import io.cryptopunks.client.example.app.AppContract
-import io.cryptopunks.client.example.app.SampleComposable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

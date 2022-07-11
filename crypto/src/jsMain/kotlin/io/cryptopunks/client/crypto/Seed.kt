@@ -1,3 +1,4 @@
+/* ktlint-disable filename */
 package io.cryptopunks.client.crypto
 
 internal actual fun generateSeed(): Int {

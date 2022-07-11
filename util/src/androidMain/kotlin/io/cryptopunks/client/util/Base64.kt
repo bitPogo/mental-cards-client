@@ -1,6 +1,5 @@
 package io.cryptopunks.client.util
 
-import android.os.Build
 import android.util.Base64
 
 actual object Base64 : UtilContract.Base64 {

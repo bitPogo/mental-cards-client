@@ -8,7 +8,7 @@ object CryptoContract {
         fun create(): KeyPair
         fun from(
             decryptionKey: String,
-            encryptionKey: String? = null,
+            encryptionKey: String? = null
         ): KeyPair
     }
 

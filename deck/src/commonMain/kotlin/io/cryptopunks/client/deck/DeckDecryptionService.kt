@@ -6,7 +6,7 @@ import io.cryptopunks.client.crypto.CryptoContract.Key
 
 internal class DeckDecryptionService(
     private val cryptoService: CryptoProtocol,
-    private val cardKeys: List<List<Key>>,
+    private val cardKeys: List<List<Key>>
 ) : DeckContract.DeckDecryptionService {
     override fun decryptCard(
         cardIdx: Int,

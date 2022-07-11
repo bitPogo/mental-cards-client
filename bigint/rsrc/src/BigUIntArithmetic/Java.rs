@@ -3,7 +3,7 @@
 use super::*;
 use jni::JNIEnv;
 use jni::objects::{JObject};
-use jni::sys::{jbyteArray, jlong};
+use jni::sys::{jbyteArray, jlong, jint, jstring};
 
 #[no_mangle]
 pub unsafe extern fn Java_io_cryptopunks_client_bignumber_BigUIntArithmetic_add(
@@ -153,4 +153,31 @@ pub unsafe extern fn Java_io_cryptopunks_client_bignumber_BigUIntArithmetic_modI
     let result = modInverse(operator1, operator2);
 
     env.byte_array_from_slice(result.as_slice()).unwrap()
+}
+
+#[no_mangle]
+pub unsafe extern fn Java_io_cryptopunks_client_bignumber_BigUIntArithmetic_intoString(
+    env: JNIEnv,
+    _: JObject,
+    number: jbyteArray,
+    radix: jint,
+) -> jstring {
+    let numberRs = env.convert_byte_array(number).unwrap();
+
+    env.new_string(intoString(numberRs, radix.try_into().unwrap()))
+        .expect("Out of memory!")
+        .into_inner()
+}
+
+#[no_mangle]
+pub unsafe extern fn Java_io_cryptopunks_client_bignumber_BigUIntArithmetic_compare(
+    env: JNIEnv,
+    _: JObject,
+    number: jbyteArray,
+    other: jbyteArray,
+) -> jint {
+    let number1 = env.convert_byte_array(number).unwrap();
+    let number2 = env.convert_byte_array(other).unwrap();
+
+    compare(number1, number2)
 }
