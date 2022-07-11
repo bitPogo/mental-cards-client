@@ -1,7 +1,6 @@
 package io.cryptopunks.client.deck.integration
 
 import com.benasher44.uuid.uuid4
-import com.benasher44.uuid.uuidFrom
 import io.cryptopunks.client.bignumber.BigUIntegerFactory
 import io.cryptopunks.client.crypto.CryptoContract.KeyPair
 import io.cryptopunks.client.crypto.CryptoService
@@ -14,7 +13,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import tech.antibytes.util.test.annotations.IgnoreJvm
 import tech.antibytes.util.test.mustBe
 
 @Serializable
@@ -62,8 +60,8 @@ class DeckSpec {
             // When
             val encoded = encoder.encode(card.toUInt(), uuid)
             val shuffled = encryptionService.shuffleAndEncrypt(listOf(encoded))
-            val encrypted = encryptionService.encryptCardWise(shuffled)
-            val decrypted = decryptionService.decryptCardWise(0, encrypted)
+            val encrypted = encryptionService.encryptCards(shuffled)
+            val decrypted = decryptionService.decryptCards(0, encrypted)
             val actual = encoder.decode(decrypted[0])
 
             // Then
@@ -137,16 +135,16 @@ class DeckSpec {
         val shuffled2 = encryptionService2.shuffleAndEncrypt(shuffled1)
         val shuffled3 = encryptionService3.shuffleAndEncrypt(shuffled2)
 
-        val encrypted1 = encryptionService1.encryptCardWise(shuffled3).map { encryptedCard ->
+        val encrypted1 = encryptionService1.encryptCards(shuffled3).map { encryptedCard ->
             bigUIntegerFactory.from(encryptedCard.toString())
         }
-        val encrypted2 = encryptionService2.encryptCardWise(encrypted1).map { encryptedCard ->
+        val encrypted2 = encryptionService2.encryptCards(encrypted1).map { encryptedCard ->
             bigUIntegerFactory.from(encryptedCard.toString())
         }
-        val encrypted3 = encryptionService3.encryptCardWise(encrypted2).map { encryptedCard ->
+        val encrypted3 = encryptionService3.encryptCards(encrypted2).map { encryptedCard ->
             bigUIntegerFactory.from(encryptedCard.toString())
         }
-        val decrypted = decryptionService.decryptCardWise(0, encrypted3)
+        val decrypted = decryptionService.decryptCards(0, encrypted3)
 
         val decoded = decrypted.map { encodedCard ->
             val (card, _) = encoder.decode(encodedCard)
@@ -171,7 +169,7 @@ class DeckSpec {
         val encoder = Encoder()
 
         // When
-        val actual = decryptionService.decryptCardWise(0, cards).map { encoded ->
+        val actual = decryptionService.decryptCards(0, cards).map { encoded ->
             val (card, _) = encoder.decode(encoded)
             card.toInt()
         }

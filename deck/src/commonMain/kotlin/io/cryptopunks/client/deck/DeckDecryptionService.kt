@@ -9,6 +9,18 @@ internal class DeckDecryptionService(
     private val cardKeys: List<List<Key>>
 ) : DeckContract.DeckDecryptionService {
     override fun decryptCard(
+        cardKeys: List<Key>,
+        card: BigUInteger
+    ): BigUInteger {
+        var decryptedCard: BigUInteger = card
+        cardKeys.forEach { key ->
+            decryptedCard = cryptoService.decrypt(key, decryptedCard)
+        }
+
+        return decryptedCard
+    }
+
+    private fun decryptCard(
         cardIdx: Int,
         card: BigUInteger
     ): BigUInteger {
@@ -20,7 +32,7 @@ internal class DeckDecryptionService(
         return decryptedCard
     }
 
-    override fun decryptCardWise(
+    override fun decryptCards(
         keyOffset: Int,
         encryptedDeck: List<BigUInteger>
     ): List<BigUInteger> = encryptedDeck.mapIndexed { cardIdx, card ->

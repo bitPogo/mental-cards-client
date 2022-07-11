@@ -105,7 +105,7 @@ class DeckEncryptionServiceSpec {
                 cryptoService = cryptoService,
                 shuffleKeyPair = KeyPair(null, kmock()),
                 cardKeys = listOf(kmock())
-            ).encryptCardWise(cards)
+            ).encryptCards(cards)
         }
 
         error.message mustBe "The amount of cards does not match the amount of keys."
@@ -143,7 +143,7 @@ class DeckEncryptionServiceSpec {
             cryptoService = cryptoService,
             shuffleKeyPair = KeyPair(null, shuffleDecryptionKey),
             cardKeys = keys
-        ).encryptCardWise(cards)
+        ).encryptCards(cards)
 
         // Then
         actual mustBe cards

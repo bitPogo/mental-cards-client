@@ -8,7 +8,6 @@ import io.cryptopunks.client.deck.TestConfig
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.Test
-import tech.antibytes.util.test.annotations.IgnoreJvm
 import tech.antibytes.util.test.mustBe
 
 class EncoderSpec {
@@ -61,4 +60,3 @@ class EncoderSpec {
         }
     }
 }
-

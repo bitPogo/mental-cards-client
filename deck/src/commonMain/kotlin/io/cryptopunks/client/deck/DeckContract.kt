@@ -16,7 +16,7 @@ object DeckContract {
             deck: List<BigUInteger>
         ): List<BigUInteger>
 
-        fun encryptCardWise(
+        fun encryptCards(
             encryptedDeck: List<BigUInteger>
         ): List<BigUInteger>
     }
@@ -30,11 +30,11 @@ object DeckContract {
 
     interface DeckDecryptionService {
         fun decryptCard(
-            cardIdx: Int,
+            cardKeys: List<Key>,
             card: BigUInteger
         ): BigUInteger
 
-        fun decryptCardWise(
+        fun decryptCards(
             keyOffset: Int,
             encryptedDeck: List<BigUInteger>
         ): List<BigUInteger>

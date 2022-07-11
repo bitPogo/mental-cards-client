@@ -43,7 +43,7 @@ internal class DeckEncryptionService(
         cryptoService.decrypt(shuffleKeyPair.decryptionKey, encryptedCard)
     )
 
-    override fun encryptCardWise(
+    override fun encryptCards(
         encryptedDeck: List<BigUInteger>
     ): List<BigUInteger> {
         return guardCards(encryptedDeck) {

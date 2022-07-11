@@ -45,13 +45,8 @@ class DeckDecryptionServiceSpec {
     fun Given_decryptCard_is_called_it_decrypts_the_given_Card() {
         // Given
         val card: BigUIntegerMock = kmock()
-        val cardIdx = 1
 
-        val keysPlayer0: List<KeyMock> = listOf(
-            kmock(),
-            kmock()
-        )
-        val keysPlayer1: List<KeyMock> = listOf(
+        val keys: List<KeyMock> = listOf(
             kmock(),
             kmock()
         )
@@ -63,20 +58,20 @@ class DeckDecryptionServiceSpec {
         // When
         val actual = DeckDecryptionService(
             cryptoService = cryptoService,
-            cardKeys = listOf(keysPlayer0, keysPlayer1)
-        ).decryptCard(cardIdx, card)
+            cardKeys = listOf()
+        ).decryptCard(keys, card)
 
         // Then
         actual mustBe card
 
         collector.assertOrder {
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
-                keysPlayer0[cardIdx],
+                keys[0],
                 card
             )
 
             cryptoService._decrypt.hasBeenStrictlyCalledWith(
-                keysPlayer1[cardIdx],
+                keys[1],
                 card
             )
         }
@@ -124,7 +119,7 @@ class DeckDecryptionServiceSpec {
         val actual = DeckDecryptionService(
             cryptoService = cryptoService,
             cardKeys = listOf(keysPlayer0, keysPlayer1, keysPlayer2)
-        ).decryptCardWise(1, deck)
+        ).decryptCards(1, deck)
 
         // Then
         actual mustBe listOf(cards[2], cards[5])
